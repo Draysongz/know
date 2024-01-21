@@ -8,21 +8,9 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const loginWithFacebook = async () => {
-      try {
-        const response = await fetch('/api/login');
-        if (response.ok) {
-          // Redirect to Facebook login page
-          window.location.href = response.url;
-        } else {
-          console.error('Error initiating Facebook login:', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error initiating Facebook login:', error);
-      }
-    };
-
-    loginWithFacebook();
+    // Redirect users to Facebook login page
+    const loginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=738539361562109&redirect_uri=https://know-phi.vercel.app/api/callback&scope=ads_management`;
+    window.location.href = loginUrl;
   }, []);
 
   return <div>Redirecting...</div>;
