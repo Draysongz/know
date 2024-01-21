@@ -9,8 +9,8 @@ const Login = () => {
 
   useEffect(() => {
     // Redirect users to Facebook login page
-    const loginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=738539361562109&redirect_uri=https://know-phi.vercel.app/api/callback&scope=ads_management`;
-    window.location.href = loginUrl;
+   
+    window.location.href = 'api/login';
   }, []);
 
   return <div>Redirecting...</div>;
