@@ -7,30 +7,32 @@ const Dashboard = ({ adAccounts, accessToken }) => {
     const [adsMetrics, setAdsMetrics] = useState([]);
   const accountsToDisplay = adAccounts.data || [];
   useEffect(() => {
-    // Assuming adAccounts is an array containing ad account details
-    const adAccountId = accountsToDisplay[0]?.account_id // Replace with the actual ad account ID
-
-    if (adAccountId) {
-      // Fetch ads metrics for a specific ad account
+    const adAccountId = accountsToDisplay[0]?.account_id;
+  
+    if (adAccountId && accessToken) {
       const fetchAdsMetrics = async () => {
         try {
-            const response = await fetch(`/api/adsMetric?adAccountId=${adAccountId}&accessToken=${accessToken}`);
-            if (response.ok) {
-              const data = await response.json();
-              setAdsMetrics(data);
-            } else {
-              console.error('Error fetching ads metrics:', response.statusText);
-              console.log(response)
-            }
-          } catch (error) {
-            console.error('Error fetching ads metrics:', error);
+          console.log('Fetching ads metrics for ad account:', adAccountId);
+  
+          const response = await fetch(`/api/adsMetric?adAccountId=${adAccountId}&accessToken=${accessToken}`);
+  
+          if (response.ok) {
+            const data = await response.json();
+            console.log('Ads metrics:', data);
+            setAdsMetrics(data);
+          } else {
+            console.error('Error fetching ads metrics:', response.statusText);
+            console.log('Full response:', response);
           }
-          
+        } catch (error) {
+          console.error('Error fetching ads metrics:', error);
+        }
       };
-
+  
       fetchAdsMetrics();
     }
-  }, [accessToken]);
+  }, [adAccounts, accessToken]);
+  
 
   const createAd = async () => {
     // Add logic to create an ad using the Facebook Marketing API
