@@ -21,13 +21,13 @@ const getAdsMetricsHandler = async (req, res) => {
         const response = await axios.get(apiUrl);
         console.log('API Response:', response.data);
 
-        if (response.data && response.data.data) {
-            const adMetrics = response.data.data;
-            console.log('ads metric', adMetrics);
-            res.status(200).json(adMetrics);
-        } else {
-            res.status(500).json({ error: 'Failed to fetch ad metrics' });
-        }
+        // if (response.data && response.data.data) {
+        //     const adMetrics = response.data.data;
+        //     console.log('ads metric', adMetrics);
+        //     res.status(200).json(adMetrics);
+        // } else {
+        //     res.status(500).json({ error: 'Failed to fetch ad metrics' });
+        // }
     } catch (error) {
         console.error('Error fetching ad metrics:', error.message);
         res.status(500).json({ error: 'Internal Server Error' });
