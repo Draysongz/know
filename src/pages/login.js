@@ -8,8 +8,21 @@ const Login = () => {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirect to the server route for handling Facebook Ads authentication
-    window.location.href = '/api/login';
+    const loginWithFacebook = async () => {
+      try {
+        const response = await fetch('/api/login');
+        if (response.ok) {
+          // Redirect to Facebook login page
+          window.location.href = response.url;
+        } else {
+          console.error('Error initiating Facebook login:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error initiating Facebook login:', error);
+      }
+    };
+
+    loginWithFacebook();
   }, []);
 
   return <div>Redirecting...</div>;

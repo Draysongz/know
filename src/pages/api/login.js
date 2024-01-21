@@ -1,35 +1,21 @@
 // pages/api/login.js
 import { NextApiRequest, NextApiResponse } from 'next';
+import axios from 'axios';
 
-const loginHandler = async (req, res) => {
+const clientId = '738539361562109';
+const redirectUri = 'https://know-phi.vercel.app/api/callback';
+
+const loginHandler = (req, res) => {
   try {
-    // Step 1: Redirect users to Facebook login page
-    res.send(`
-      <html>
-        <head>
-          <script>
-            function loginWithFacebook() {
-              FB.login(function(response) {
-                if (response.authResponse) {
-                  // User is logged in and has granted your app permissions
-                  window.location.href = '/api/callback?code=' + response.authResponse.accessToken;
-                } else {
-                  // User cancelled login or did not grant permissions
-                  console.log('Login cancelled');
-                }
-              }, { scope: 'ads_management' });
-            }
-          </script>
-        </head>
-        <body>
-          <button onclick="loginWithFacebook()">Login with Facebook Ads</button>
-        </body>
-      </html>
-    `);
+    // Redirect users to Facebook login page
+    const loginUrl = `https://www.facebook.com/v18.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&scope=ads_management`;
+    res.redirect(loginUrl);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
+};
+
 };
 
 export default loginHandler;
