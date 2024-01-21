@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const clientId = '738539361562109';
 const clientSecret = '8158044eafa5566582a749267606fc19';
-const redirectUri = 'http://localhost:3000/api/callback';
+const redirectUri = 'https://know-dv1g466gw-brandai.vercel.app/api/callback';
 
 const loginHandler = async (req, res) => {
   try {
