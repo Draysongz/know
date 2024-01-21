@@ -28,7 +28,7 @@ const getAdsHandler = async (req, res) => {
   
   } catch (error) {
     console.error('Error fetching ads:', error.message);
-    return res.send(error)
+    return res.json(error.message)
   }
 };
 
