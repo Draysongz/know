@@ -7,7 +7,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
     const router = useRouter();
     const [adsMetrics, setAdsMetrics] = useState([]);
   const accountsToDisplay = adAccounts.data || [];
-  
+
   useEffect(() => {
     const adAccountId = accountsToDisplay[0]?.account_id;
 
@@ -16,7 +16,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
         try {
           console.log('Fetching ads metrics for ad account:', adAccountId);
 
-          const response = await axios.get(`/api/adsMetric`, {
+          const response = await axios.get(`/api/ads`, {
             params: { adAccountId, accessToken },
           });
 
