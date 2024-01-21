@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const FACEBOOK_GRAPH_API_BASE_URL = 'https://graph.facebook.com/v18.0'; // Replace with the desired API version
+const FACEBOOK_GRAPH_API_BASE_URL = 'https://graph.facebook.com/v12.0'; // Replace with the desired API version
 
 const getAdsMetricsHandler = async (req, res) => {
   try {
