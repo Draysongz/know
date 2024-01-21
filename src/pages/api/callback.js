@@ -10,7 +10,7 @@ const callbackHandler = async (req, res) => {
   try {
     // Step 2: Exchange code for access token
     const { code } = req.query;
-    const tokenUrl = `https://graph.facebook.com/v12.0/oauth/access_token?client_id=${clientId}&redirect_uri=${redirectUri}&client_secret=${clientSecret}&code=${code}`;
+    const tokenUrl = `https://graph.facebook.com/v18.0/oauth/access_token?client_id=${clientId}&redirect_uri=${redirectUri}&client_secret=${clientSecret}&code=${code}`;
     const { data: tokenResponse } = await axios.get(tokenUrl);
 
     // Step 3: Use the access token to make requests to the Facebook Marketing API
