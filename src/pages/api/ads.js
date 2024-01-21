@@ -1,35 +1,27 @@
+// pages/api/ads.js
 import axios from 'axios';
 
-const FACEBOOK_GRAPH_API_BASE_URL = 'https://graph.facebook.com/v13.0'; // Replace with the desired API version
-
-const getAdsHandler = async (req, res) => {
+export default async function handler(req, res) {
   try {
-    const { adAccountId, accessToken } = req.query;
-    console.log(adAccountId)
-    console.log(accessToken)
+    const { query: { adId, accessToken } } = req;
 
-    if (!adAccountId || !accessToken) {
-      return res.status(400).json({ error: 'Missing ad account ID or access token' });
-    }else{
-        // // Fetch all ad groups (ads) for the given ad account
-    const apiUrl = `${FACEBOOK_GRAPH_API_BASE_URL}/${adAccountId}/adgroups?fields=id,name,status&access_token=${accessToken}`;
-    const response = await axios.get(apiUrl);
-
-    console.log(response)
-    // if (response.data) {
-    //   const ads = response.data;
-    //   console.log('Ads:', ads);
-    //   res.status(200).json(ads);
-    // } else {
-    //   res.status(500).json({ error: 'Failed to fetch ads' });
-    // }
+    if (!adId || !accessToken) {
+      return res.status(400).json({ error: 'Missing ad ID or access token' });
     }
 
-  
-  } catch (error) {
-    console.error('Error fetching ads:', error.message);
-    return res.json(error.message)
-  }
-};
+    const fields = 'insights{impressions}';
+    const apiUrl = `https://graph.facebook.com/v18.0/${adId}?fields=${fields}&access_token=${accessToken}`;
 
-export default getAdsHandler;
+    const response = await axios.get(apiUrl);
+
+    if (response.data && response.data.insights) {
+      const adMetrics = response.data.insights;
+      res.status(200).json(adMetrics);
+    } else {
+      res.status(500).json({ error: 'Failed to fetch ad metrics' });
+    }
+  } catch (error) {
+    console.error('Error fetching ad metrics:', error.message);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}

@@ -9,33 +9,25 @@ const Dashboard = ({ adAccounts, accessToken }) => {
   const accountsToDisplay = adAccounts.data || [];
 
   useEffect(() => {
-    const adAccountId = accountsToDisplay[0]?.account_id;
+    const fetchData = async () => {
+      const adId = accountsToDisplay[0]?.account_id;
 
-    if (adAccountId && accessToken) {
-      const fetchAdsMetrics = async () => {
-        try {
-          console.log('Fetching ads metrics for ad account:', adAccountId);
+      try {
+        const response = await fetch(`/api/ads?adId=${adId}&accessToken=${accessToken}`);
 
-          const response = await fetch(`/api/ads?adAccountId=${encodeURIComponent(adAccountId)}&accessToken=${encodeURIComponent(accessToken)}`);
-
-
-          if (response.status === 200) {
-            const data = response.data;
-            console.log('Ads metrics:', data);
-            setAdsMetrics(data);
-          } else {
-            console.error('Error fetching ads metrics:', response.statusText);
-            console.log('Full response:', response);
-          }
-        } catch (error) {
-          console.error('Error fetching ads metrics:', error);
+        if (response.ok) {
+          const data = await response.json();
+          setAdsMetrics(data);
+        } else {
+          console.error('Error fetching ad metrics:', response.statusText);
         }
-      };
+      } catch (error) {
+        console.error('Error fetching ad metrics:', error);
+      }
+    };
 
-      fetchAdsMetrics();
-    }
-  }, [adAccounts, accessToken]);
-
+    fetchData();
+  }, []);
   
 
   const createAd = async () => {
