@@ -28,7 +28,7 @@ const getAdsHandler = async (req, res) => {
   
   } catch (error) {
     console.error('Error fetching ads:', error.message);
-    res.status(500).json({ error: 'Internal Server Error' });
+    return res.status(500).json(error);
   }
 };
 
