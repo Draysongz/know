@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const getAdsMetricsHandler = async (req, res) => {
     try {
       const { adAccountId, accessToken } = req.query;
