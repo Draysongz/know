@@ -16,6 +16,6 @@ const loginHandler = (req, res) => {
   }
 };
 
-};
+
 
 export default loginHandler;
