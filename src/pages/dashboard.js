@@ -1,24 +1,27 @@
 // pages/dashboard.js
 import React, {useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
 
 const Dashboard = ({ adAccounts, accessToken }) => {
     const router = useRouter();
     const [adsMetrics, setAdsMetrics] = useState([]);
   const accountsToDisplay = adAccounts.data || [];
+  
   useEffect(() => {
     const adAccountId = accountsToDisplay[0]?.account_id;
-  
+
     if (adAccountId && accessToken) {
       const fetchAdsMetrics = async () => {
         try {
           console.log('Fetching ads metrics for ad account:', adAccountId);
-  
-          const response = await fetch(`/api/ads?adAccountId=${adAccountId}&accessToken=${accessToken}`);
-          console.log('response', response)
-  
-          if (response.ok) {
-            const data = await response.json();
+
+          const response = await axios.get(`/api/adsMetric`, {
+            params: { adAccountId, accessToken },
+          });
+
+          if (response.status === 200) {
+            const data = response.data;
             console.log('Ads metrics:', data);
             setAdsMetrics(data);
           } else {
@@ -29,10 +32,11 @@ const Dashboard = ({ adAccounts, accessToken }) => {
           console.error('Error fetching ads metrics:', error);
         }
       };
-  
+
       fetchAdsMetrics();
     }
   }, [adAccounts, accessToken]);
+
   
 
   const createAd = async () => {
