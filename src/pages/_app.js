@@ -4,7 +4,7 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {
     window.fbAsyncInit = function() {
       FB.init({
-        appId: 'your-app-id',
+        appId: '738539361562109',
         autoLogAppEvents: true,
         xfbml: true,
         version: 'v18.0',
