@@ -14,7 +14,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
         try {
           console.log('Fetching ads metrics for ad account:', adAccountId);
   
-          const response = await fetch(`/api/adsMetric?adAccountId=${adAccountId}&accessToken=${accessToken}`);
+          const response = await fetch(`/api/ads?adAccountId=${adAccountId}&accessToken=${accessToken}`);
           console.log('response', response)
   
           if (response.ok) {
