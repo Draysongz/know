@@ -8,9 +8,11 @@ const getAdsHandler = async (req, res) => {
     console.log(adAccountId)
     console.log(accessToken)
 
-    // if (!adAccountId || !accessToken) {
-    //   return res.status(400).json({ error: 'Missing ad account ID or access token' });
-    // }
+    if (!adAccountId || !accessToken) {
+      return res.status(400).json({ error: 'Missing ad account ID or access token' });
+    }else{
+        return res.status(200).json('everythin has been received from you')
+    }
 
     // // Fetch all ad groups (ads) for the given ad account
     // const apiUrl = `${FACEBOOK_GRAPH_API_BASE_URL}/${adAccountId}/adgroups?fields=id,name,status&access_token=${accessToken}`;
