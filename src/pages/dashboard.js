@@ -30,7 +30,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
 
       fetchAdsMetrics();
     }
-  }, [adAccounts]);
+  }, [accessToken, accountsToDisplay]);
 
   const createAd = async () => {
     // Add logic to create an ad using the Facebook Marketing API
