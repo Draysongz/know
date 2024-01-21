@@ -16,9 +16,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
         try {
           console.log('Fetching ads metrics for ad account:', adAccountId);
 
-          const response = await axios.get(`/api/ads`, {
-            params: { adAccountId, accessToken },
-          });
+          const response = await axios.get(`/api/ads`)
 
           if (response.status === 200) {
             const data = response.data;
