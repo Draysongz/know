@@ -7,6 +7,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
     const router = useRouter();
     const [adsMetrics, setAdsMetrics] = useState([]);
   const accountsToDisplay = adAccounts.data || [];
+  console.log(accountsToDisplay)
 
   useEffect(() => {
     const fetchData = async () => {
