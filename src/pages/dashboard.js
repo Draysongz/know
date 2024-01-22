@@ -10,7 +10,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const adId = accountsToDisplay[0]?.account_id;
+      const adId = accountsToDisplay[0]?.id;
 
       try {
         const response = await fetch(`/api/ads?adId=${adId}&accessToken=${accessToken}`);
@@ -43,7 +43,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
       <h1>Your Facebook Ads Accounts</h1>
       <ul>
         {accountsToDisplay.map((account) => (
-          <li key={account.account_id}> Your Ad account Id: {account.account_id}</li>
+          <li key={account.account_id}> Your Ad account Id: {account.id}</li>
         ))}
       </ul>
       <div>
