@@ -11,14 +11,15 @@ const Dashboard = ({ adAccounts, accessToken }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const adId = accountsToDisplay[0]?.id;
+      const adId = adAccounts.data[0]?.id;
 
       try {
         const response = await fetch(`/api/ads?adId=${adId}&accessToken=${accessToken}`);
 
         if (response.ok) {
           const data = await response.json();
-          setAdsMetrics(data);
+          console.log('Data:', data);
+          setAdsMetrics(data.data); // Assuming data.data contains the array of ads
         } else {
           console.error('Error fetching ad metrics:', response.statusText);
         }
@@ -28,7 +29,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
     };
 
     fetchData();
-  }, []);
+  }, [adAccounts, accessToken]);
   
 
   const createAd = async () => {
@@ -48,15 +49,16 @@ const Dashboard = ({ adAccounts, accessToken }) => {
         ))}
       </ul>
       <div>
-      <h1>Your Facebook Ads Dashboard</h1>
-      <button onClick={createAd}>Create Ad</button>
-      <h2>Ads Metrics</h2>
+      <h1>Your Facebook Ads</h1>
       <ul>
-        {adsMetrics && adsMetrics.map((metric) => (
-          <li key={metric.id}>{JSON.stringify(metric)}</li>
+        {adsMetrics.map((ad) => (
+          <li key={ad.id}>
+            <p>ID: {ad.id}</p>
+            <p>Name: {ad.name}</p>
+            <p>Status: {ad.status}</p>
+          </li>
         ))}
       </ul>
-      <p>Access Token: {accessToken}</p>
     </div>
     </div>
   );
