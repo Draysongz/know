@@ -22,7 +22,7 @@ const callbackHandler = async (req, res) => {
     // You can now use the accessToken to make requests to the Facebook Marketing API
 
     // For example, fetching ad accounts
-    const adAccountsUrl = `https://graph.facebook.com/v12.0/me/adaccounts{name}?access_token=${accessToken}`;
+    const adAccountsUrl = `https://graph.facebook.com/v13.0/me/adaccounts{name}?access_token=${accessToken}`;
     const { data: adAccounts } = await axios.get(adAccountsUrl);
 
     console.log('Ad Accounts:', adAccounts);
