@@ -44,11 +44,7 @@ const Dashboard = ({ adAccounts, accessToken }) => {
       <h1>Your Facebook Ads Accounts</h1>
       <ul>
         {accountsToDisplay.map((account) => (
-          <div>
-          <li key={account.account_id}> Your Ad account Id: {account.id}</li>
-          <li key={account.name}>Your ad Name: {account.name}</li>
-          </div>
-          
+          <li key={account.account_id}> Your Ad account Id: {account.id} <br/> Your Ad Name: {account.name}</li>
         ))}
       </ul>
       <div>
